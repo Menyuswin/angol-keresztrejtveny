@@ -17,4 +17,6 @@ echo "Leallitas: Ctrl+C"
 echo
 
 cd "$GYOKER"
-exec python3 -m http.server "$PORT" --bind 127.0.0.1
+# A "::" mindket vermet (IPv4 es IPv6) kiszolgalja, igy akkor is mukodik,
+# ha a rendszer a "localhost"-ot ::1-re oldja fel, nem 127.0.0.1-re.
+exec python3 -m http.server "$PORT" --bind ::
