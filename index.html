@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Angol szókincs keresztrejtvény</title>
+<meta name="description" content="Keresztrejtvény-gyakorló a saját mentett angol–magyar szószedetedből.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
+</head>
+<body>
+
+<header class="fejlec">
+  <div class="fejlec-cim">
+    <h1>Angol szókincs keresztrejtvény</h1>
+    <p class="alcim">A magyar meghatározáshoz írd be az angol szót. <span id="szoszedet-meret"></span></p>
+  </div>
+
+  <div class="vezerlok">
+    <label class="mezo">
+      <span>Nehézség</span>
+      <select id="nehezseg">
+        <option value="konnyu">Könnyű – 12 szó</option>
+        <option value="kozepes" selected>Közepes – 18 szó</option>
+        <option value="nehez">Nehéz – 26 szó</option>
+        <option value="profi">Profi – 34 szó</option>
+      </select>
+    </label>
+    <button id="uj-gomb" class="gomb gomb-elsodleges" type="button">Új rejtvény</button>
+  </div>
+</header>
+
+<div class="allapotsor">
+  <div class="allapot-elem"><span class="allapot-cimke">Idő</span><strong id="ido">00:00</strong></div>
+  <div class="allapot-elem"><span class="allapot-cimke">Kész</span><strong id="haladas">0 / 0</strong></div>
+  <div class="allapot-elem"><span class="allapot-cimke">Segítség</span><strong id="segitseg-szam">0</strong></div>
+  <div class="allapot-elem"><span class="allapot-cimke">Megoldva összesen</span><strong id="statisztika">0</strong></div>
+</div>
+
+<main class="tartalom">
+
+  <section class="racs-panel">
+    <div id="racs-burok" class="racs-burok" aria-label="Keresztrejtvény rács"></div>
+
+    <div class="aktualis-definicio" id="aktualis-definicio" hidden>
+      <span class="aktualis-jeloles" id="aktualis-jeloles"></span>
+      <span class="aktualis-szoveg" id="aktualis-szoveg"></span>
+    </div>
+
+    <div class="gombsor">
+      <button id="ellenoriz-gomb" class="gomb" type="button">Ellenőrzés</button>
+      <button id="betu-gomb" class="gomb" type="button">Betű felfedése</button>
+      <button id="szo-gomb" class="gomb" type="button">Szó felfedése</button>
+      <button id="megold-gomb" class="gomb gomb-halvany" type="button">Teljes megoldás</button>
+      <button id="torol-gomb" class="gomb gomb-halvany" type="button">Törlés</button>
+      <button id="nyomtat-gomb" class="gomb gomb-halvany" type="button">Nyomtatás</button>
+    </div>
+
+    <p class="sugo">
+      Billentyűk: <kbd>betűk</kbd> beírás · <kbd>Szóköz</kbd> irányváltás ·
+      <kbd>↑↓←→</kbd> mozgás · <kbd>Backspace</kbd> törlés · <kbd>Enter</kbd> következő meghatározás
+    </p>
+  </section>
+
+  <section class="definicio-panel">
+    <div class="definicio-blokk">
+      <h2>Vízszintes</h2>
+      <ol id="vizszintes-lista" class="definicio-lista"></ol>
+    </div>
+    <div class="definicio-blokk">
+      <h2>Függőleges</h2>
+      <ol id="fuggoleges-lista" class="definicio-lista"></ol>
+    </div>
+  </section>
+
+</main>
+
+<div id="siker" class="siker" hidden>
+  <div class="siker-doboz">
+    <h2>Megvan! 🎉</h2>
+    <p id="siker-szoveg"></p>
+    <button id="siker-gomb" class="gomb gomb-elsodleges" type="button">Új rejtvény</button>
+  </div>
+</div>
+
+<footer class="lablec">
+  A szavak a saját mentett fordításaidból származnak · <span id="verzio"></span>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/crossword.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

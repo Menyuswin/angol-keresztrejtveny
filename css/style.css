@@ -1,0 +1,386 @@
+/* ---- Szinpaletta (vilagos alap, sotet mod alul) ---- */
+:root {
+  --hatter: #f4f1ea;
+  --lap: #ffffff;
+  --szoveg: #1d1f24;
+  --halvany-szoveg: #6b7280;
+  --keret: #d6d1c6;
+  --eros-keret: #2f3138;
+  --kiemeles: #1f6f5c;
+  --kiemeles-halvany: #d8ece5;
+  --aktiv-szo: #fdf3d3;
+  --aktiv-cella: #f7d774;
+  --hiba: #c0392b;
+  --siker: #1f7a4d;
+  --arnyek: 0 1px 3px rgba(0,0,0,.09), 0 8px 24px rgba(0,0,0,.06);
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+/* A `hidden` attributum erosebb legyen a display:flex-nel is. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  padding: 0 16px 48px;
+  background: var(--hatter);
+  color: var(--szoveg);
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* ---- Fejlec ---- */
+.fejlec {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-block: 24px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.fejlec h1 {
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 1.4vw, 1.9rem);
+  letter-spacing: -0.02em;
+}
+
+.alcim {
+  margin: 4px 0 0;
+  color: var(--halvany-szoveg);
+  font-size: .9rem;
+}
+
+.vezerlok {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.mezo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: .75rem;
+  color: var(--halvany-szoveg);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+select {
+  font: inherit;
+  font-size: .9rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--szoveg);
+  padding: 8px 10px;
+  border: 1px solid var(--keret);
+  border-radius: var(--radius);
+  background: var(--lap);
+}
+
+/* ---- Gombok ---- */
+.gomb {
+  font: inherit;
+  font-size: .9rem;
+  padding: 9px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--keret);
+  background: var(--lap);
+  color: var(--szoveg);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .05s;
+}
+.gomb:hover { border-color: var(--kiemeles); }
+.gomb:active { transform: translateY(1px); }
+
+.gomb-elsodleges {
+  background: var(--kiemeles);
+  border-color: var(--kiemeles);
+  color: #fff;
+  font-weight: 600;
+}
+.gomb-elsodleges:hover { filter: brightness(1.08); }
+
+.gomb-halvany { color: var(--halvany-szoveg); }
+
+/* ---- Allapotsor ---- */
+.allapotsor {
+  max-width: 1180px;
+  margin: 0 auto 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.allapot-elem {
+  background: var(--lap);
+  border: 1px solid var(--keret);
+  border-radius: var(--radius);
+  padding: 7px 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  box-shadow: var(--arnyek);
+}
+
+.allapot-cimke {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--halvany-szoveg);
+}
+
+.allapot-elem strong {
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+}
+
+/* ---- Elrendezes ---- */
+.tartalom {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: 24px;
+  align-items: start;
+}
+
+.racs-panel, .definicio-panel {
+  background: var(--lap);
+  border: 1px solid var(--keret);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--arnyek);
+}
+
+/* ---- Racs ---- */
+.racs-burok { overflow-x: auto; }
+
+table.racs {
+  border-collapse: collapse;
+  margin: 0 auto;
+  table-layout: fixed;
+}
+
+table.racs td {
+  width: var(--cella, 38px);
+  height: var(--cella, 38px);
+  padding: 0;
+  border: 1px solid var(--keret);
+  position: relative;
+  background: #e9e5db;
+}
+
+/* Figyelem: ezeknek legalabb olyan specifikusnak kell lenniuk, mint a
+ * fenti `table.racs td` szabalynak, kulonben az felulirja a hatteruket. */
+table.racs td.betu {
+  background: var(--lap);
+  border: 1px solid var(--eros-keret);
+}
+
+table.racs td.szo-kiemelt { background: var(--aktiv-szo); }
+table.racs td.cella-kiemelt { background: var(--aktiv-cella); }
+
+td .szam {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--halvany-szoveg);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+
+td input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  font-size: calc(var(--cella, 38px) * 0.52);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--szoveg);
+  padding: 0;
+  caret-color: transparent;
+}
+td input:focus { outline: none; }
+
+td.hibas input { color: var(--hiba); text-decoration: line-through; }
+td.felfedett input { color: var(--kiemeles); }
+
+/* ---- Aktualis definicio (foleg mobilon hasznos) ---- */
+.aktualis-definicio {
+  margin-top: 14px;
+  padding: 11px 14px;
+  background: var(--kiemeles-halvany);
+  border-radius: var(--radius);
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-size: .95rem;
+}
+
+.aktualis-jeloles {
+  font-weight: 700;
+  color: var(--kiemeles);
+  white-space: nowrap;
+}
+
+/* ---- Gombsor ---- */
+.gombsor {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sugo {
+  margin: 14px 0 0;
+  font-size: .78rem;
+  color: var(--halvany-szoveg);
+}
+
+kbd {
+  background: var(--hatter);
+  border: 1px solid var(--keret);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: .75rem;
+  font-family: inherit;
+}
+
+/* ---- Meghatarozasok ---- */
+.definicio-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  position: sticky;
+  top: 16px;
+}
+
+.definicio-blokk h2 {
+  margin: 0 0 8px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--halvany-szoveg);
+  border-bottom: 1px solid var(--keret);
+  padding-bottom: 6px;
+}
+
+.definicio-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.definicio-lista li {
+  display: flex;
+  gap: 9px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: .9rem;
+}
+.definicio-lista li:hover { background: var(--hatter); }
+.definicio-lista li.kivalasztott { background: var(--aktiv-szo); font-weight: 600; }
+.definicio-lista li.kesz { color: var(--halvany-szoveg); }
+.definicio-lista li.kesz .def-szoveg { text-decoration: line-through; }
+
+.def-szam {
+  font-weight: 700;
+  color: var(--kiemeles);
+  min-width: 1.5em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.def-hossz {
+  color: var(--halvany-szoveg);
+  font-weight: 400;
+  font-size: .85em;
+}
+
+/* ---- Siker ablak ---- */
+.siker {
+  position: fixed;
+  inset: 0;
+  background: rgba(20,22,26,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+
+.siker-doboz {
+  background: var(--lap);
+  border-radius: 16px;
+  padding: 28px 32px;
+  text-align: center;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.siker-doboz h2 { margin: 0 0 8px; color: var(--siker); }
+.siker-doboz p { margin: 0 0 18px; color: var(--halvany-szoveg); }
+
+.lablec {
+  max-width: 1180px;
+  margin: 28px auto 0;
+  color: var(--halvany-szoveg);
+  font-size: .78rem;
+  text-align: center;
+}
+
+/* ---- Keskeny kepernyo ---- */
+@media (max-width: 900px) {
+  .tartalom { grid-template-columns: 1fr; }
+  .definicio-panel { position: static; max-height: none; }
+  .fejlec { padding-block: 18px 10px; }
+}
+
+/* ---- Sotet mod ---- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hatter: #14161a;
+    --lap: #1e2126;
+    --szoveg: #e9eaec;
+    --halvany-szoveg: #9aa1ab;
+    --keret: #343841;
+    --eros-keret: #6f7681;
+    --kiemeles: #4ec2a0;
+    --kiemeles-halvany: #1b3b33;
+    --aktiv-szo: #3b3520;
+    --aktiv-cella: #6d5c1e;
+    --hiba: #ef6b5c;
+    --siker: #56c98a;
+    --arnyek: 0 1px 3px rgba(0,0,0,.4);
+  }
+  table.racs td { background: #2a2d33; }
+  .gomb-elsodleges { color: #10241e; }
+}
+
+/* ---- Nyomtatas ---- */
+@media print {
+  body { background: #fff; padding: 0; }
+  .vezerlok, .gombsor, .sugo, .allapotsor, .siker, .aktualis-definicio, .lablec { display: none !important; }
+  .racs-panel, .definicio-panel { box-shadow: none; border: 0; }
+  .tartalom { grid-template-columns: 1fr; }
+  .definicio-panel { position: static; max-height: none; overflow: visible; }
+  td input { color: transparent !important; }
+  table.racs td { border-color: #000; background: #d8d8d8; }
+  table.racs td.betu { border: 1px solid #000; background: #fff; }
+  table.racs td.szo-kiemelt,
+  table.racs td.cella-kiemelt { background: #fff; }
+}
