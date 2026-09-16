@@ -25,6 +25,21 @@ Ezután nyisd meg: <http://localhost:8000>
 > A `file://` megnyitás is működik (nincs `fetch`, minden adat be van ágyazva),
 > de a helyi kiszolgáló a javasolt út.
 
+## Telepítés iPadre (PWA)
+
+Az app Progressive Web App: iPadről telepíthető, utána teljes képernyőn,
+internet nélkül is fut, saját ikonnal a kezdőképernyőn.
+
+1. Nyisd meg az oldalt a **Safariban** (fontos: nem Chrome-ban — a
+   „Kezdőképernyőhöz adás” PWA-telepítést csak a Safari támogatja iPadOS-on).
+   Ehhez az oldalnak `http(s)://` címen kell elérhetőnek lennie (pl. a
+   `./serve.sh`-sal elindított helyi kiszolgálóról, vagy egy közzétett
+   webcímről) — `file://`-ról nem települ.
+2. Koppints a megosztás ikonra (□↑), majd **„Kezdőképernyőhöz adás”**.
+3. Az így létrejött ikon önálló appként nyílik meg (nincs Safari-sáv),
+   és az első megnyitás után internet nélkül is használható — a rejtvények
+   helyben, a beépített szószedetből generálódnak.
+
 ## Használat
 
 | Művelet | Billentyű |
@@ -51,6 +66,9 @@ js/data.js         a szószedet: 1274 [ANGOL, magyar] pár
 js/crossword.js    a rácsgeneráló motor
 js/app.js          a játéklogika és a felhasználói felület
 serve.sh           helyi kiszolgáló
+manifest.json      PWA-metaadatok (név, ikonok, színek)
+sw.js              service worker: offline gyorsítótár
+icons/             app-ikonok (kezdőképernyő, PWA manifest)
 ```
 
 ### A rácsgenerálás
